@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Delay Prediction Model</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .predict-button {
+            width: 200px;
+            padding: 8px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px auto 0;
+            display: block;
+        }
+
+        .predict-button:hover {
+            background-color: #218838;
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Delay Prediction Model</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: #1e2852;">
+    <div class="container">
+        <h1 style="color: #333; text-align: center;">Flight Delay Predictor</h1>
+        <form action="{{ url_for('predict')}}"method="post">
+            <div class="grid-container">
+                <div>
+                    <label for="flight_number" style="color: #333;">Flight Number:</label>
+                    <input type="text" id="flight_number" name="flight_number" placeholder="0-1860" required>
+                </div>
+                <div>
+                    <label for="departure_point" style="color: #333;">Departure Point:</label>
+                    <input type="text" id="departure_point" name="departure_point" placeholder="0-1860" required>
+                </div>
+                <div>
+                    <label for="arrival_point" style="color: #333;">Arrival Point:</label>
+                    <input type="text" id="arrival_point_point" name="arrival_point" placeholder="0-1860" required>
+                </div>
+                <div>
+                    <label for="status" style="color: #333;">Flight Status:</label>
+                    <input type="number" id="status" name="status" placeholder="0-4" required>
+                </div>
+                <div>
+                    <label for="aircraft_code" style="color: #333;">Aircraft Code:</label>
+                    <input type="text" id="aircraft_code" name="aircraft_code" placeholder="0-67" required>
+                </div>
+                <div>
+                    <label for="date_flightyear" style="color: #333;">Flight Year:</label>
+                    <input type="number" id="date_flightyear" name="date_flightyear" placeholder="2017" required>
+                </div>
+
+                <div>
+                    <label for="date_flightmonth" style="color: #333;">Flight Month:</label>
+                    <input type="number" id="date_flightmonth" name="date_flightmonth" placeholder="1-12" required>
+                </div>
+                <div>
+                    <label for="date_flightday" style="color: #333;">Flight Day:</label>
+                    <input type="number" id="date_flightday" name="date_flightday" placeholder="1-31" required>
+                </div>
+                <div>
+                    <label for="scheduled_dept_hr" style="color: #333;">Scheduled Hour of Departure:</label>
+                    <input type="number" id="scheduled_dept_hr" name="scheduled_dept_hr" placeholder="0-23" required>
+                </div>
+                <div>
+                    <label for="scheduled_dept_mins" style="color: #333;">Scheduled Minutes of Departure:</label>
+                    <input type="number" id="scheduled_dept_mins" name="scheduled_dept_mins" placeholder="0-59" required>
+                </div>
+                <div>
+                    <label for="scheduled_arrival_hr" style="color: #333;">Scheduled Hour of Arrival:</label>
+                    <input type="number" id="scheduled_arrival_hr" name="scheduled_arrival_hr" placeholder="0-23" required>
+                </div>
+                
+                
+                <div>
+                    <label for="scheduled_arrival_mins" style="color: #333;">Scheduled Minutes of Arrival:</label>
+                    <input type="number" id="scheduled_arrival_mins" name="scheduled_arrival_mins" placeholder="0-59" required>
+                </div>
+                
+               
+            </div>
+            <button type="submit" class="predict-button">Predict Delay Minutes</button>
+        </form>
+        <div>
+                                      {{prediction_text}}
+        </div>
+        <p style="color: #333; text-align: center; font-style: italic;">Developed by CAIMLOps @2024</p>
+    </div>
+   
+</body>
+</html>

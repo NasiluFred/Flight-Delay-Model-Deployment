@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Delay Prediction</title>
+</head>
+<body>
+    <h1>Flight Delay Prediction</h1>
+    <form id="predictionForm">
+        <label for="flightNumber">Flight Number:</label>
+        <input type="text" id="flightNumber" name="flightNumber" required><br>
+        
+        <label for="dayOfFlight">Day of Flight:</label>
+        <input type="number" id="dayOfFlight" name="dayOfFlight" required><br>
+        
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br>
+
+        <!-- Add more fields as required for your model -->
+
+        <button type="submit">Predict</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const inputData = {
+                flightNumber: document.getElementById('flightNumber').value,
+                dayOfFlight: parseInt(document.getElementById('dayOfFlight').value),
+                status: document.getElementById('status').value
+                // Add more fields here
+            };
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('result').innerText = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('result').innerText = 'Predicted Delay (minutes): ' + data.prediction;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Error occurred. Check console for details.';
+            });
+        });
+    </script>
+</body>
+</html>
